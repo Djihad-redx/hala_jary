@@ -1,9 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hala_jary_social_media">
+    package="com.example.hala_jary">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="hala_jary_social_media"
+        android:label="hala_jary"
         android:icon="@mipmap/ic_launcher">
+       <provider
+           android:name="androidx.core.content.FileProvider"
+           android:authorities="${applicationId}.provider"
+           android:exported="false"
+           android:grantUriPermissions="true">
+           <meta-data
+               android:name="android.support.FILE_PROVIDER_PATHS"
+               android:resource="@xml/provider_paths"/>
+       </provider>
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyCx94c5UvzaMEjsQGk_zMgvL4yu-KycTiQ"/>
         <activity
+            android:exported="true"
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

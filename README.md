@@ -1,4 +1,4 @@
-# hala_jary_social_media
+# hala_jary
 
 A new Flutter project.
 
