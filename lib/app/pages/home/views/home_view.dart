@@ -93,7 +93,8 @@ class HomePage extends GetView {
           body: SizedBox.expand(
           child: PageView(
             onPageChanged: (index){
-
+              controller.currentIndex.value = index;
+              controller.bottomNavIndex.value = index;
             },
            // physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
             children: [

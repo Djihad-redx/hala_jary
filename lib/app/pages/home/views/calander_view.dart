@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:hala_jary/app/pages/home/controllers/calander_controller.dart';
 import 'package:hala_jary/app/utility/constants.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../../../utility/global.dart';
 class CalenderView extends GetView {
 
   @override
@@ -38,62 +40,62 @@ class CalenderView extends GetView {
             // ),
             // ),
             Container(
-
               decoration: BoxDecoration(
-              //  borderRadius: BorderRadius.all(Radius.circular(8)),
+              borderRadius: BorderRadius.all(Radius.circular(5)),
                 color: Colors.white,
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: Colors.grey.withOpacity(0.5),
-                //     spreadRadius: 5,
-                //     blurRadius: 7,
-                //     offset: Offset(0, 3), // changes position of shadow
-                //   ),
-                // ],
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
               ),
-              margin: EdgeInsets.only(left: 0,right: 0,top: 0),
+              margin: EdgeInsets.only(left: 10,right: 10,top: 10),
               child: Obx(()=>  TableCalendar(
-                calendarStyle: CalendarStyle(
-                  selectedDecoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                      border: Border.all(color: COLOR_2,width:4),
-                  ),
-                  canMarkersOverflow: false,
-                  selectedTextStyle: TextStyle(color: Colors.black),
-
-                ),
-                headerStyle: HeaderStyle(
-                  titleTextStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold
-                  ),
-                  titleCentered: true,
-                  leftChevronIcon: Icon(Icons.chevron_left,color: Colors.white,),
-                  rightChevronIcon: Icon(Icons.chevron_right,color: Colors.white,),
-                  formatButtonVisible: false,
-                  headerMargin: EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
-                    color: COLOR_2,
-                   image: DecorationImage(
-                     image: AssetImage("assets/images/background_calender.png"),
-                     fit: BoxFit.cover
-                   )
-                   // borderRadius: BorderRadius.only(topRight: Radius.circular(8),topLeft: Radius.circular(8))
-
-                  )
-                ),
-                daysOfWeekStyle: DaysOfWeekStyle(
-                  decoration: BoxDecoration(
-                    color: Colors.white
-                  )
-                ),
                 firstDay: kFirstDay,
                 lastDay: kLastDay,
                 focusedDay: controller.focusedDay.value,
-                calendarFormat: controller.calendarFormat.value,
+               // headerVisible: false,
+                calendarStyle: CalendarStyle(
+                  selectedDecoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: COLOR_2,width:4),
+                  ),
+                  canMarkersOverflow: false,
+                  selectedTextStyle: TextStyle(color: Colors.black),
+                ),
+                headerStyle: HeaderStyle(
+                      titleTextStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                      ),
+                      titleCentered: true,
+                      leftChevronIcon: Icon(Icons.chevron_left,color: Colors.white,),
+                      rightChevronIcon: Icon(Icons.chevron_right,color: Colors.white,),
+                      formatButtonVisible: false,
+                      headerMargin: EdgeInsets.only(bottom: 10),
+                      decoration: BoxDecoration(
+                          color: COLOR_2,
+                          image: DecorationImage(
+                              image: AssetImage("assets/images/background_calender.png"),
+                              fit: BoxFit.cover
+                          ),
+                         borderRadius: BorderRadius.only(topRight: Radius.circular(8),topLeft: Radius.circular(5))
+                      )),
                 selectedDayPredicate: (day) {
                   return isSameDay(controller.selectedDay.value, day);
+                },
+                rangeStartDay: controller.rangeStart?.value,
+                rangeEndDay: controller.rangeEnd?.value,
+                calendarFormat: controller.calendarFormat.value,
+                rangeSelectionMode: controller.rangeSelectionMode.value,
+                eventLoader: controller.getEventsForDay,
+                holidayPredicate: (day) {
+                  // Every 20th day of the month will be treated as a holiday
+                  return day.day == 20;
                 },
                 onDaySelected: (selectedDay, focusedDay) {
                   if (!isSameDay(controller.selectedDay.value, selectedDay)) {
@@ -101,25 +103,26 @@ class CalenderView extends GetView {
                     controller.focusedDay.value = focusedDay;
                   }
                 },
+                onRangeSelected: controller.onRangeSelected,
+              //  onCalendarCreated: controller.initController,
+                onPageChanged: (focusedDay) => controller.focusedDayy.value.value = focusedDay,
                 onFormatChanged: (format) {
-                  if (controller.calendarFormat.value != format) {
+                  if (controller.calendarFormat != format) {
                     controller.calendarFormat.value = format;
                   }
                 },
-                onPageChanged: (focusedDay) {
-                  controller.focusedDay.value = focusedDay;
-                },
-              )),
+              ),),
             ),
             Container(
               height: 60,
               color: Colors.white,
-              margin: EdgeInsets.only(bottom: 12),
+              margin: EdgeInsets.only(bottom: 25,top: 12),
               padding: EdgeInsets.all(15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(children: [
+                  Row(
+                    children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Text("Today",style: TextStyle(
