@@ -24,10 +24,10 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
     "ic_home.svg",
     "ic_groupe.svg",
     "ic_services.svg",
-    "ic_chat.svg",
+    "ic_date.svg",
   ];
 
-  final List<String> iconTitles = ["home","Group","Services","Chat"];
+  final List<String> iconTitles = ["home","Group","Services","Activities"];
 
   @override
   void onInit() {

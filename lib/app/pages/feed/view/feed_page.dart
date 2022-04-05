@@ -27,6 +27,7 @@ class FeedPage extends GetView {
         child: RefreshWidget(
           onRefresh: () async { toastMe("refreshed", Colors.red); },
           child: ListView.separated(
+            controller: feedController.scrollController,
             separatorBuilder: (context, int) => Container(
               height: 10,
             ),

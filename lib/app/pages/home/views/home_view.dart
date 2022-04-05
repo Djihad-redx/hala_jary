@@ -8,6 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:hala_jary/app/pages/chat/view/chat_view.dart';
 import 'package:hala_jary/app/pages/feed/view/feed_page.dart';
 import 'package:hala_jary/app/pages/home/controllers/home_controller.dart';
+import 'package:hala_jary/app/pages/home/views/calander_view.dart';
 import 'package:hala_jary/app/pages/home/views/no_internet_view.dart';
 import 'package:hala_jary/app/pages/new_post/view/new_post_view.dart';
 import 'package:hala_jary/app/pages/services/view/services_view.dart';
@@ -35,7 +36,21 @@ class HomePage extends GetView {
           leading: InkWell(
               onTap:(){
                  controller.openDrawer();
-              },child: Icon(Icons.menu,color: Colors.black,size: 35,)),
+              },
+              child:Container(
+            width: 20,
+            height: 20,
+            margin: EdgeInsets.all(7),
+            decoration: BoxDecoration(
+              border: Border.all(width: 1.7),
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                  image: AssetImage("assets/images/04.jfif",),fit: BoxFit.cover
+              ),
+            ),
+              
+              )),
+
           title: Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
             height: 40,
@@ -57,18 +72,13 @@ class HomePage extends GetView {
             }, icon: Icon(Icons.notifications,color: Colors.black,size: 30,)),
             InkWell(
               onTap: (){
-                Get.to(ProfileView(),transition: Transition.rightToLeft);
+                Get.to(ChatView(),transition: Transition.rightToLeft);
 
               },
               child: Container(
-                width: 37,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1.7),
-                  shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage("assets/images/04.jfif"),fit: BoxFit.cover
-                ),
-              ),),
+                margin: EdgeInsets.only(right: 5),
+                width: 25,
+                child: SvgPicture.asset("assets/icons/ic_chat.svg"),),
             ),
             //SvgPicture.asset("assets/icons/ic_profile.svg",width: 35,),
             SizedBox(width: 15,)
@@ -82,12 +92,15 @@ class HomePage extends GetView {
               width:getWidth(context)*.92,child: DrawerWidget()),
           body: SizedBox.expand(
           child: PageView(
-            physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+            onPageChanged: (index){
+
+            },
+           // physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
             children: [
               status? FeedPage(): NoInternetView(),
               GroupView(),
               ServicesView(),
-              ChatView()
+              CalenderView()
             ],
             controller: controller.pageController,
           ),

@@ -47,7 +47,7 @@ class DrawerWidget extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: (){
-                          Get.to(ProfileView(),transition: Transition.rightToLeft);
+                          Get.to(ProfileView(),transition: Transition.leftToRight);
                         },
                         child: Container(
                           height: getHight(context)*.15,width: getHight(context)*.15,decoration: BoxDecoration(

@@ -10,6 +10,12 @@ class ChatView extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: PRIMARY_COLOR,
+        leading: BackButton(color: Colors.black,),
+        title: Text("Chat",style: TextStyle(color: Colors.black),),
+
+      ),
       body: Container(
         child: Column(
           children: [
