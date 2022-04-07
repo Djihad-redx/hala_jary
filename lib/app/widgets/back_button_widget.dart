@@ -18,7 +18,7 @@ class MyBackButton extends StatelessWidget {
           },
           child: Container(
             margin: EdgeInsets.only(top: 40,bottom: 20),
-            height: 55,width: 55,child: SvgPicture.asset("assets/icons/ic_back_button.svg"),),
+            height: 50,width: 50,child: SvgPicture.asset("assets/icons/ic_back_button.svg"),),
         ));
   }
 }

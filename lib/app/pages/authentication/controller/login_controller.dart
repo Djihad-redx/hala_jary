@@ -81,11 +81,7 @@ class LoginController extends GetxController with GetSingleTickerProviderStateMi
   }
 
   setLoading(){
-    if(isLoading.value){
-      isLoading(false);
-    }else{
-      isLoading(true);
-    }
+      isLoading(!isLoading.value);
   }
 
 }
