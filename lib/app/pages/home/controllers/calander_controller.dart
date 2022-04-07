@@ -15,6 +15,7 @@ class CalenderController extends GetxController{
   var rangeSelectionMode = RangeSelectionMode.toggledOff.obs;
   Rx<DateTime>? rangeStart = DateTime.now().obs;
   Rx<DateTime>? rangeEnd = DateTime.now().obs;
+  var ifCanDragUp = true.obs;
 
   @override
   void onInit() {
@@ -56,7 +57,6 @@ class CalenderController extends GetxController{
   }
 
   void onRangeSelected(DateTime? start, DateTime? end, DateTime focusedDay) {
-
       focusedDayy.value.value = focusedDay;
       rangeStart?.value = start!;
       rangeEnd?.value = end!;

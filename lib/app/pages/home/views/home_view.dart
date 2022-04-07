@@ -40,15 +40,14 @@ class HomePage extends GetView {
               child:Container(
             width: 20,
             height: 20,
-            margin: EdgeInsets.all(7),
+            margin: EdgeInsets.all(8),
             decoration: BoxDecoration(
-              border: Border.all(width: 1.7),
+              border: Border.all(width: 2,color: Colors.grey),
               shape: BoxShape.circle,
               image: DecorationImage(
                   image: AssetImage("assets/images/04.jfif",),fit: BoxFit.cover
               ),
             ),
-              
               )),
 
           title: Container(
@@ -68,8 +67,10 @@ class HomePage extends GetView {
         ],),
         ),
           actions: [
-            IconButton(onPressed: (){
-            }, icon: Icon(Icons.notifications,color: Colors.black,size: 30,)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: SvgPicture.asset("assets/icons/ic_notiffication.svg"),
+            ),
             InkWell(
               onTap: (){
                 Get.to(ChatView(),transition: Transition.rightToLeft);
@@ -90,22 +91,25 @@ class HomePage extends GetView {
                   borderRadius: BorderRadius.only(topRight: Radius.circular(30))
               ),
               width:getWidth(context)*.92,child: DrawerWidget()),
-          body: SizedBox.expand(
-          child: PageView(
-            onPageChanged: (index){
-              controller.currentIndex.value = index;
-              controller.bottomNavIndex.value = index;
-            },
-           // physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
-            children: [
-              status? FeedPage(): NoInternetView(),
-              GroupView(),
-              ServicesView(),
-              CalenderView()
-            ],
-            controller: controller.pageController,
-          ),
+          body: WillPopScope(
+            onWillPop: () => controller.onWillPop(),
+            child: SizedBox.expand(
+            child: PageView(
+              onPageChanged: (index){
+                controller.currentIndex.value = index;
+                controller.bottomNavIndex.value = index;
+              },
+             // physics: ScrollPhysics(parent: NeverScrollableScrollPhysics()),
+              children: [
+                status? FeedPage(): NoInternetView(),
+                GroupView(),
+                ServicesView(),
+                CalenderView()
+              ],
+              controller: controller.pageController,
+            ),
         ),
+          ),
         floatingActionButton: ScaleTransition(
           scale: controller.animation,
           child: FloatingActionButton(

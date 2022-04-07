@@ -7,6 +7,7 @@ const String CONNECTED_AGAIN = "Connected again!";
 const String MAP_BOX_KEY = "pk.eyJ1IjoiZGppaGFkIiwiYSI6ImNsMGtqZWp6dzAxMnIzY3BsZ2l5a3N4cHgifQ.JGdHJ1QzC3DAfbFDbPV5WA";
 const String MAP_BOX_STYLE = "https://api.mapbox.com/styles/v1/djihad/cl0kk14bz004215qgjvuvzmvq/tiles/256/{z}/{x}/{y}@2x?access_token=$MAP_BOX_KEY";
 const String MAP_BOX_STYLE_GALAXY = "https://api.mapbox.com/styles/v1/djihad/cl0kqgkfm007714qb76ys7i63/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZGppaGFkIiwiYSI6ImNsMGtqZWp6dzAxMnIzY3BsZ2l5a3N4cHgifQ.JGdHJ1QzC3DAfbFDbPV5WA";
+const TOKEN_KEY = "token";
 
 //Colors
 const Gradient BACKGROUND_COLOR = LinearGradient(

@@ -9,10 +9,12 @@ class PasswordField extends StatelessWidget {
     Key? key,
     required this.hint,
     required this.icon,
+    this.controller
   }) : super(key: key);
 
   final String? icon;
   final String? hint;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +41,7 @@ class PasswordField extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: TextFormField(
+              controller: controller,
               obscureText: true,
               decoration: const InputDecoration(
                 hintText: "Password",

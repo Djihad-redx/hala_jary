@@ -7,4 +7,10 @@ class NewPostController extends  GetxController{
   selectValue(String value){
     selectedValue.value = value;
   }
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
 }

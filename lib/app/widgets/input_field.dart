@@ -11,12 +11,14 @@ class InputField extends StatelessWidget {
     Key? key,
     required this.hint,
     required this.icon,
-    this.divider
+    this.divider,
+    this.controller
   }) : super(key: key);
 
   final String? icon;
   final String? hint;
   final bool? divider;
+  final TextEditingController? controller;
 
 
   @override
@@ -42,7 +44,9 @@ class InputField extends StatelessWidget {
         ):Container() ,
         Flexible(
           child: Container(padding: EdgeInsets.symmetric(horizontal: 5),
-            child: TextField(decoration: InputDecoration(
+            child: TextField(
+              controller: controller,
+              decoration: InputDecoration(
                 hintText: hint,
                 border: InputBorder.none,
                 hintStyle: TextStyle(

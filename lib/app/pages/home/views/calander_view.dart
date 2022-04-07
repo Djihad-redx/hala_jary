@@ -14,32 +14,12 @@ class CalenderView extends GetView {
     return Scaffold(
       body: Container(
         color: COLOR_CHAT_BACKGROUND.withOpacity(0.4),
+        height: getHight(context),
+        width: getWidth(context),
         child: Column(
           children: [
-            // Container(
-            //   height: 80,
-            //   width: getWidth(context),
-            //   decoration: BoxDecoration(
-            //   image: DecorationImage(
-            //     image: AssetImage("assets/images/background_calender.png"),
-            //     fit: BoxFit.cover
-            //   )
-            // ),
-            // child: Column(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Padding(
-            //       padding: const EdgeInsets.symmetric(horizontal:18.0),
-            //       child: Text("Calender",style: TextStyle(
-            //         color: Colors.white,
-            //         fontSize: 22,
-            //       )),
-            //     ),
-            //   ],
-            // ),
-            // ),
             Container(
+              padding: EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(5)),
                 color: Colors.white,
@@ -57,14 +37,41 @@ class CalenderView extends GetView {
                 firstDay: kFirstDay,
                 lastDay: kLastDay,
                 focusedDay: controller.focusedDay.value,
-               // headerVisible: false,
                 calendarStyle: CalendarStyle(
                   selectedDecoration: BoxDecoration(
-                    shape: BoxShape.circle,
+                  //  shape: BoxShape.rectangle,
+                    color: Colors.white,
                     border: Border.all(color: COLOR_2,width:4),
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        offset: Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                   ),
+                  cellMargin: EdgeInsets.all(8),
                   canMarkersOverflow: false,
                   selectedTextStyle: TextStyle(color: Colors.black),
+                  defaultDecoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Colors.white
+                  ),
+                  markerDecoration: BoxDecoration(
+                    color: COLOR_2
+                  ),
+                  markerMargin: EdgeInsets.only(top: 10),
+                  todayDecoration: BoxDecoration(
+                    color: COLOR_2,
+                   borderRadius: BorderRadius.all(Radius.circular(5))
+                   // shape: BoxShape.circle
+                  ),
+                  weekendDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5))
+                  )
+
                 ),
                 headerStyle: HeaderStyle(
                       titleTextStyle: TextStyle(
@@ -88,15 +95,15 @@ class CalenderView extends GetView {
                 selectedDayPredicate: (day) {
                   return isSameDay(controller.selectedDay.value, day);
                 },
-                rangeStartDay: controller.rangeStart?.value,
-                rangeEndDay: controller.rangeEnd?.value,
+               // rangeStartDay: controller.rangeStart?.value,
+               // rangeEndDay: controller.rangeEnd?.value,
                 calendarFormat: controller.calendarFormat.value,
                 rangeSelectionMode: controller.rangeSelectionMode.value,
                 eventLoader: controller.getEventsForDay,
-                holidayPredicate: (day) {
-                  // Every 20th day of the month will be treated as a holiday
-                  return day.day == 20;
-                },
+
+                // holidayPredicate: (day) {
+                //   return day.day == 4;
+                // },
                 onDaySelected: (selectedDay, focusedDay) {
                   if (!isSameDay(controller.selectedDay.value, selectedDay)) {
                     controller.selectedDay.value = selectedDay;
@@ -113,42 +120,86 @@ class CalenderView extends GetView {
                 },
               ),),
             ),
-            Container(
-              height: 60,
-              color: Colors.white,
-              margin: EdgeInsets.only(bottom: 25,top: 12),
-              padding: EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text("Today",style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold
-                      ),),
+            Obx(()=>controller.calendarFormat.value == CalendarFormat.month?
+            GestureDetector(
+              onVerticalDragEnd: (_){
+                controller.calendarFormat.value = CalendarFormat.week;
+              },
+              child:  Container(
+                height: 55,
+                color: Colors.white,
+                margin: EdgeInsets.only(bottom: 25,top: 12),
+                padding: EdgeInsets.all(15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Text("Today",style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold
+                          ),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Text("3 Activities",style: TextStyle(
+                              fontSize: 16
+                          ),),
+                        )
+                      ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Text("3 Activities",style: TextStyle(
-                        fontSize: 16
-                      ),),
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Text("See all"),
                     )
-                  ],),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Text("See all"),
-                  )
-                ],
+                  ],
+                ),
               ),
-            ),
+            ):
+            GestureDetector(
+              onVerticalDragEnd: (_){
+                controller.calendarFormat.value = CalendarFormat.month;
+              },
+              child:  Container(
+                height: 60,
+                color: Colors.white,
+                margin: EdgeInsets.only(bottom: 25,top: 12),
+                padding: EdgeInsets.all(15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Text("Today",style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold
+                          ),),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Text("3 Activities",style: TextStyle(
+                              fontSize: 16
+                          ),),
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                      child: Text("See all"),
+                    )
+                  ],
+                ),
+              ),
+            ),) ,
             Expanded(child: ListView.builder(
               padding: EdgeInsets.only(left: 20,right: 20,bottom: 50),
               itemCount: 3,
               itemBuilder: (context, index) => Container(child:
-            Column(
+               Column(
               children: [
                 Row(children: [
                   Padding(

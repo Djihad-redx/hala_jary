@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../../utility/constants.dart';
+import '../../../utility/global.dart';
 import '../../../utility/hex_color.dart';
+import '../../../utility/shared_preferences.dart';
+import '../../authentication/views/login_view.dart';
 import '../views/home_view.dart';
 
 class HomeController extends GetxController with GetSingleTickerProviderStateMixin{
@@ -15,7 +19,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   final autoSizeGroup = AutoSizeGroup();
   var bottomNavIndex = 0.obs;
    var currentLang = Get.locale!.languageCode.obs;
-
+  late DateTime currentBackPressTime = DateTime(2016);
   late AnimationController animationController;
   late Animation<double> animation;
   late CurvedAnimation curve;
@@ -82,5 +86,20 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
     currentLang(newLang);
     Get.updateLocale(Locale(newLang));
     Get.back();
+  }
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      toastMe("Click again to exit",COLOR_1);
+      return Future.value(false);
+    }
+    return Future.value(true);
+  }
+
+  logout(){
+    setInShared(TOKEN_KEY, "");
+    Get.offAll(LoginView(),transition: Transition.leftToRight);
   }
 }

@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -155,9 +156,13 @@ class NewPostView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
                         child: Icon(Icons.video_call),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
-                        child: Icon(Icons.image),
+                      InkWell(
+                        onTap: (){
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
+                          child: Icon(Icons.image),
+                        ),
                       ),
                       InkWell(
                         onTap: (){

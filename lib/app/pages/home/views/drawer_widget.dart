@@ -3,12 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:hala_jary/app/pages/authentication/views/login_view.dart';
 import 'package:hala_jary/app/pages/home/views/account_setting.dart';
 import 'package:hala_jary/app/pages/map/binding/map_binding.dart';
 import 'package:hala_jary/app/pages/map/controller/map_controller.dart';
 import 'package:hala_jary/app/pages/map/view/map_box.dart';
 import 'package:hala_jary/app/pages/map/view/map_view.dart';
 import 'package:hala_jary/app/pages/profile/view/profile_view.dart';
+import 'package:hala_jary/app/utility/shared_preferences.dart';
 
 import '../../../utility/constants.dart';
 import '../../services/view/service_details_view.dart';
@@ -217,10 +219,10 @@ class DrawerWidget extends StatelessWidget {
                         child: Column(children: [
                           Container(
                             margin: EdgeInsets.all(10),
-                            height: 8,width: 80,
+                            height: 6,width: 60,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(8)),
-                                color: Colors.grey
+                                color: Colors.black
                             ),
                           ),
                           InkWell(
@@ -326,19 +328,24 @@ class DrawerWidget extends StatelessWidget {
                     padding: const EdgeInsets.only(left:30.0),
                     child: Divider(thickness: 0.9),
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: SvgPicture.asset("assets/icons/ic_log_out.svg",height: 30,),
-                        ),
-                        Text("Log out".tr,style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold
-                        ),)
-                      ],
+                  InkWell(
+                    onTap: (){
+                      controller.logout();
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: SvgPicture.asset("assets/icons/ic_log_out.svg",height: 30,),
+                          ),
+                          Text("Log out".tr,style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold
+                          ),)
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
