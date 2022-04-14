@@ -25,7 +25,7 @@ const Gradient BACKGROUND_COLOR2 = LinearGradient(
 const Gradient BACKGROUND_COLOR3 = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    stops: [0.3                                                                    ,1],
+    stops: [0.3,1],
     colors: [Color(0xFFFEFEFD),COLOR_CHAT_BACKGROUND]
 );
 const Color HINT_COLOR = Color(0xFFBBBBBB);
@@ -48,7 +48,6 @@ const List<String> HOBBIES = [' swimming', ' Gym', ' Fishing ', ' Golf ','Cricke
 final YEARS = List<int>.generate(100, (i) => 2020-i);
 final DAYS = List<int>.generate(31, (i) => 31-i);
 const TERMS_CONDITION = "hello this is our terms and condition";
-
 
 //Sizes
 double getHight(BuildContext context){

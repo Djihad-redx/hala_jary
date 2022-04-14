@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 import '../../../utility/constants.dart';
 import '../../../utility/repo.dart';
 import '../../home/views/home_view.dart';
+import '../../splash/controler/splash_controler.dart';
 class LoginController extends GetxController with GetSingleTickerProviderStateMixin{
   var emailController = TextEditingController().obs;
   var passwordController = TextEditingController().obs;
@@ -67,6 +68,7 @@ class LoginController extends GetxController with GetSingleTickerProviderStateMi
       _login(emailController.value.text,passwordController.value.text).then((value){
         setLoading();
         if(value!=null){
+          SplashController.userInfo = value;
           setInShared(TOKEN_KEY, value.data!.token!);
           Get.to(HomePage(), transition: Transition.rightToLeft);
         }

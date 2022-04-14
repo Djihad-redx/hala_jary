@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,10 +11,12 @@ import 'package:hala_jary/app/pages/map/controller/map_controller.dart';
 import 'package:hala_jary/app/pages/map/view/map_box.dart';
 import 'package:hala_jary/app/pages/map/view/map_view.dart';
 import 'package:hala_jary/app/pages/profile/view/profile_view.dart';
+import 'package:hala_jary/app/routes/app_pages.dart';
 import 'package:hala_jary/app/utility/shared_preferences.dart';
 
 import '../../../utility/constants.dart';
 import '../../services/view/service_details_view.dart';
+import '../../splash/controler/splash_controler.dart';
 import '../controllers/home_controller.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -54,22 +57,27 @@ class DrawerWidget extends StatelessWidget {
                         child: Container(
                           height: getHight(context)*.15,width: getHight(context)*.15,decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage("assets/images/04.jfif"),fit: BoxFit.cover
+                          image: SplashController.userInfo.data!.image!=null? DecorationImage(
+                              image: CachedNetworkImageProvider(SplashController.userInfo.data!.image.toString())
+                              ,fit: BoxFit.cover
+                          ):
+                          DecorationImage(
+                              image: AssetImage("assets/images/profile_pic.png")
+                              ,fit: BoxFit.cover
                           ),
                           border: Border.all(color: THIRD_COLOR ,width: 4)
                         ),),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
-                        child: Text("ANNABELLA CLARA",style: TextStyle(
+                        child: Text(SplashController.userInfo.data!.fullname!,style: TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.bold
                         ),),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 4.0),
-                        child: Text("Software developer",style: TextStyle(
+                        child: Text(SplashController.userInfo.data!.profession!,style: TextStyle(
                           fontSize: 14,
 
                         ),),
@@ -151,7 +159,7 @@ class DrawerWidget extends StatelessWidget {
                   InkWell(
                     onTap: (){
                       mpcontroller.convertWidgetToPicture().then((value) {
-                        Get.to(MapView(),transition: Transition.leftToRight,binding: MapBinding());
+                        Get.toNamed(Paths.MAP_PAGE);
                       });
 
                     },

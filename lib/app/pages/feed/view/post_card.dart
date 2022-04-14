@@ -1,13 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:hala_jary/app/pages/feed/controller/post_controller.dart';
 import 'package:hala_jary/app/pages/feed/view/comment_view.dart';
 import 'package:hala_jary/app/pages/feed/view/full_screen_image.dart';
-import 'package:hala_jary/app/pages/feed/view/hide_reason_view.dart';
 import 'package:hala_jary/app/pages/profile/view/profile_view.dart';
 import 'package:hala_jary/app/utility/constants.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
@@ -16,6 +12,7 @@ import 'flick_multi_player.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 
+import 'hide_reason_view.dart';
 
 class PostCard extends GetView {
   const PostCard({
@@ -34,8 +31,9 @@ class PostCard extends GetView {
   @override
   Widget build(BuildContext context) {
     PostController controller = Get.put(PostController());
-    return Container(
-      padding: const EdgeInsets.only(top: 7,left: 10,right: 10),
+    return AnimatedContainer(
+      duration: Duration(seconds: 1),
+      padding: const EdgeInsets.only(top: 7,left: 0,right: 0),
       color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -51,8 +49,8 @@ class PostCard extends GetView {
                   },
                   child: Container(
                     margin: const EdgeInsets.only(left: 10,right: 10,top: 5),
-                    height: 70,
-                    width: 70,
+                    height: 55,
+                    width: 55,
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(image: AssetImage("assets/images/01.jpg"),fit: BoxFit.cover)
@@ -62,13 +60,13 @@ class PostCard extends GetView {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:  [
                     Text('Mohamed Djihed',style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold
                     ),),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 2.0),
                       child: Text('Software Developer',style: TextStyle(
-                          fontSize: 12
+                          fontSize: 11
                       ),),
                     ),
                     Row(
@@ -87,7 +85,7 @@ class PostCard extends GetView {
                 ),
               ],),
               Padding(
-                padding:  EdgeInsets.all(5.0),
+                padding:  EdgeInsets.all(10.0),
                 child:  InkWell(
                     onTap: (){
                       Get.bottomSheet(
@@ -191,7 +189,7 @@ class PostCard extends GetView {
                     },
                     child: Visibility(
                         visible: isMoreVisible!,
-                        child: Icon(Icons.more_vert,size: 30,))),
+                        child: Icon(Icons.more_vert,size: 25,))),
               )
             ],
           ),
@@ -301,7 +299,7 @@ class PostCard extends GetView {
             child: Divider(color: Colors.grey,),
           ),
           Obx(()=>Container(
-            margin: const EdgeInsets.only(bottom: 10,top: 5),
+            margin: const EdgeInsets.only(bottom: 10,top:0),
             child:
             Row(children:  [
               Expanded(child:
@@ -330,8 +328,8 @@ class PostCard extends GetView {
                 },
                 child: Column(
                   children: [
-                    SvgPicture.asset("assets/icons/ic_comment.svg",height: 20,),
-                    Text("Comment".tr,style: TextStyle(fontSize: 11),)
+                    SvgPicture.asset("assets/icons/ic_comment.svg",height: 15,),
+                    Text("Comment".tr,style: TextStyle(fontSize: 10),)
                   ],
                 ),
               )),
@@ -342,14 +340,13 @@ class PostCard extends GetView {
                 },
                 child: Column(
                   children: [
-                    Icon(Icons.share,size: 20,),
+                    Icon(Icons.share,size: 15,),
                     Text("Share".tr,style: TextStyle(fontSize: 11),)
                   ],
                 ),
               )),
             ],),
           ),)
-
         ],
       ),
     );

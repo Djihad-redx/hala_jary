@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class PostController extends GetxController{
   var isLiked = false.obs;
-  var likeIcon = Icon(Icons.favorite_border,size: 20,).obs;
+  var likeIcon = Icon(Icons.favorite_border,size: 15,).obs;
   var index = 0.obs;
   late PageController pageController;
 

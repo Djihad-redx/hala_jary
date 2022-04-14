@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hala_jary/app/pages/authentication/controller/forget_password_controller.dart';
 import 'package:hala_jary/app/pages/authentication/views/verification_otp_view.dart';
 import '../../../utility/constants.dart';
 import '../../../widgets/back_button_widget.dart';
@@ -13,6 +14,7 @@ class ForgotPassword extends GetView {
 
   @override
   Widget build(BuildContext context) {
+    final _controller = Get.put(ForgetPasswordController());
     return Scaffold(
       body: Container(
           padding: EdgeInsets.symmetric(horizontal: 40),
@@ -43,7 +45,9 @@ class ForgotPassword extends GetView {
                   ),),
                 ),
                 SizedBox(height: getHight(context)*.03,),
-                InputField(icon: "ic_Email",hint: "Email or ID",divider: true),
+                InputField(
+                    controller: _controller.emailController.value,
+                    icon: "ic_Email",hint: "Email or ID",divider: true),
                 SizedBox(height: getHight(context)*.02,),
                 SizedBox(height: getHight(context)*.04,),
                 InkWell(

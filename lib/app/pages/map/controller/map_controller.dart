@@ -179,19 +179,15 @@ class MapController extends GetxController {
   }
 
   onMapCreated(GoogleMapController _cntlr)async {
-      String style = await rootBundle.loadString("assets/style_map.json");
-
+     // String style = await rootBundle.loadString("assets/style_map.json");
       mapController = _cntlr;
-      mapController.setMapStyle(style);
-
+   //   mapController.setMapStyle(style);
       zoomValue = zoomValue = 12.9;
       mapController.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(target: LatLng(25.119952828933872,55.13093948364258), zoom: zoomValue),
         ),
       );
-
-
   }
 
   getCurrentPosition(){

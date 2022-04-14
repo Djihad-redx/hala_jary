@@ -25,7 +25,6 @@ class CommentView extends GetView {
           children: [
             Expanded(
               child: CustomScrollView(
-                controller: feedController.scrollControllerComment,
                 physics: BouncingScrollPhysics(),
                 slivers:[
                   SliverToBoxAdapter(child:  Padding(

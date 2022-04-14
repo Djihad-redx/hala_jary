@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +23,10 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   late DateTime currentBackPressTime = DateTime(2016);
   late AnimationController animationController;
   late Animation<double> animation;
+  late Animation<double> animation2;
   late CurvedAnimation curve;
+
+
 
   final iconList = <String>[
     "ic_home.svg",
@@ -58,8 +62,12 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
       begin: 0,
       end: 1,
     ).animate(curve);
+    animation2 = Tween<double>(
+      begin: 1,
+      end: 0,
+    ).animate(curve);
     Future.delayed(
-      Duration(seconds: 1),
+      Duration(milliseconds: 1200),
           () => animationController.forward(),
     );
   }
@@ -102,4 +110,5 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
     setInShared(TOKEN_KEY, "");
     Get.offAll(LoginView(),transition: Transition.leftToRight);
   }
+
 }

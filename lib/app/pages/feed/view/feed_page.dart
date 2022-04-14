@@ -27,13 +27,13 @@ class FeedPage extends GetView {
         child: RefreshWidget(
           onRefresh: () async { toastMe("refreshed", Colors.red); },
           child: ListView.separated(
-            controller: feedController.scrollController,
+            controller: feedController.scrollBottomBarController,
             separatorBuilder: (context, int) => Container(
               height: 10,
             ),
-            itemCount: feedController.items.length,
+            itemCount: feedController.items.length+1,
             itemBuilder: (context, index) {
-              return index+1 == feedController.items.length?
+              return index == feedController.items.length?
               Obx(()=>   Container(
                 height:150,child: Center(child: Text(feedController.isLoadMore.value?"Loading...".tr:"No more items".tr),),))
            : PostCard(isMoreVisible: true,flickMultiManager:  feedController.flickMultiManager,imag:  feedController.items[index]['image'],urlList:  feedController.urlList,);

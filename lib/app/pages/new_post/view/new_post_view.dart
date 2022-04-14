@@ -1,4 +1,5 @@
 
+import 'package:drishya_picker/drishya_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -41,10 +42,9 @@ class NewPostView extends StatelessWidget {
                    color: Colors.red,
                    fontSize: 17,
                 fontWeight: FontWeight.bold
-   ),),
+              ),),
             ),
           )
-
         ],
       ),
       body: Container(
@@ -156,13 +156,33 @@ class NewPostView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
                         child: Icon(Icons.video_call),
                       ),
-                      InkWell(
-                        onTap: (){
+                      ValueListenableBuilder<Data>(
+                        valueListenable: controller.notifier,
+                        builder: (context, data, child) {
+                          return GalleryViewField(
+                            selectedEntities: data.entities,
+                            // gallerySetting: gallerySetting.copyWith(
+                            //   maximumCount: data.maxLimit,
+                            //   albumSubtitle: 'Image only',
+                            //   requestType: data.requestType,
+                            //   selectedEntities: data.entities,
+                            // ) ,
+                            onChanged: (entity, remove) {
+                              final entities = controller.notifier.value.entities.toList();
+                              remove
+                                  ? entities.remove(entity)
+                                  : entities.add(entity);
+                              controller.notifier.value =
+                                  controller.notifier.value.copyWith(entities: entities);
+                            },
+                            onSubmitted: (list) {
+                              controller.notifier.value =
+                                  controller.notifier.value.copyWith(entities: list);
+                            },
+                            child: child,
+                          );
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
-                          child: Icon(Icons.image),
-                        ),
+                        child: const Icon(Icons.photo),
                       ),
                       InkWell(
                         onTap: (){
@@ -250,7 +270,6 @@ class NewPostView extends StatelessWidget {
             ),
             ),
           ),
-
         ],),
       ),
     );

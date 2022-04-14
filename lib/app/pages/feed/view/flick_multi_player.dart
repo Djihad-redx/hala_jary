@@ -1,5 +1,5 @@
 
-import 'package:hala_jary/app/pages/feed/view/portrait_controls.dart';
+import 'package:hala_jary/app/pages/feed/view/portrait_controls_view.dart';
 
 import '../../../utility/flick_multi_manager.dart';
 import 'package:flick_video_player/flick_video_player.dart';
